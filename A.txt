@@ -1,0 +1,21 @@
+cmd 이용해서 여러가지 해봄
+
+cd이동	   md만들기	dir보기	notepad메모장열기
+echo만들고 안에쓰고 
+
+python 다운로드  점프 투 파이썬 참조
+
+python 환경변수 확인 	다른버전도 다운로드함
+windows X86 executable installer
+pythontutor.com [예습기, 복습기]
+조건문 if 참 또는 거짓
+반복문 for a in 1-9 : 맨 마지막 클론 죽요::::;
+
+git 버전관리 이정표  github
+
+Zim WiKi 바뀐내용 확인	git Windows 다운
+Zim 시간표 Edit - Journal	
+
+cmd 절대 경로 
+\python\python3.5\python.exe
+tree 뭐가 있는지 탐색
