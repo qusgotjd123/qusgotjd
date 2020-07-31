@@ -1,0 +1,110 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-07-31T17:30:43+09:00
+
+====== techelPython ======
+Created 금요일 31 7월 2020
+
+# 전달받은 파일을 읽어 2차원 리스트로 만든다
+
+# 입력을 파일이름
+# 출력은 2차원 리스트 'a',1],['b',1
+
+
+def transform_data(param):
+	data_list = []
+	with open(param, 'r', encoding='utf8') as f:
+		line1 = f.readline()
+		line2 = f.readline()
+		print(line2)
+		temp_list = line2.split(",")
+		length = len(temp_list)
+		length = int(length / 2)
+		for i in range(length):
+			data_list.append([temp_list[i * 2], temp_list[i * 2 + 1]])
+	return data_list
+
+
+print(transform_data('202007\\s1_20200729_1.txt'))
+
+# 'a',1],['b',1],['a',1],['c',1
+# a,1\nb,1\nc,1형식의  csv파일
+report_data = []
+
+def check_dupl(item_list):
+	# 중복여부, 중복인덱스
+	for i in range(len(report_data)):
+		if report_data[i][0] == item_list[0]:
+			return True, i
+	return False, None
+
+def make_report(param_list):
+	# 'a', 1], ['b', 1], ['a', 1], ['c', 1
+	for i in param_list:
+		# ['a', 1]
+		is_dupl, idx_dupl  = check_dupl(i)
+		if is_dupl:
+			report_data[idx_dupl][1] = i[1] + report_data[idx_dupl][1]
+		else:
+			report_data.append(i)
+
+	# csv 출력 형식으로 파일을 저장한다.
+	with open('202007.csv', 'w', encoding='utf8') as f:
+		for i in report_data:
+			f.write("{0},{1}\n".format(i[0],i[1]))
+
+make_report('a',1],['b',1],['a',1],['c',1)
+make_report('r',1],['b',5],['a',1],['c',1)
+print(report_data)
+
+
+import os
+
+report_data = []
+# 데이터 저장
+
+def dir_list(param_string):
+	with os.scandir(param_string) as entries:
+		for entry in entries:
+			file_name = entry.name
+			print(file_name)
+			t_list = transform_data("{0}\\{1}".format(param_string,file_name))
+			make_report(t_list)
+
+def transform_data(param):
+	data_list = []
+	with open(param, 'r', encoding='utf8') as f:
+		line1 = f.readline()
+		line2 = f.readline()
+		print(line2)
+		temp_list = line2.split(",")
+		length = len(temp_list)
+		length = int(length / 2)
+		for i in range(length):
+			data_list.append([temp_list[i * 2], int(temp_list[i * 2 + 1])])
+	print(data_list)
+	return data_list
+
+def check_dupl(item_list):
+	# 중복여부, 중복인덱스
+	for i in range(len(report_data)):
+		if report_data[i][0] == item_list[0]:
+			return True, i
+	return False, None
+
+def make_report(param_list):
+	# [['a', 1], ['b', 1], ['a', 1], ['c', 1]]
+	for i in param_list:
+		# ['a', 1]
+		is_dupl, idx_dupl  = check_dupl(i)
+		if is_dupl:
+			report_data[idx_dupl][1] = i[1] + report_data[idx_dupl][1]
+		else:
+			report_data.append(i)
+
+	# csv 출력 형식으로 파일을 저장한다.
+	with open('202007.csv', 'w', encoding='utf8') as f:
+		for i in report_data:
+			f.write("{0},{1}\n".format(i[0],i[1]))
+
+dir_list('202007')
