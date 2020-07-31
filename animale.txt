@@ -1,0 +1,51 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-07-30T15:06:18+09:00
+
+
+
+# 1. 주어진 문자열 name 과 number 리스트로 나누기
+a = "apple, 237, 기린, 32, 원숭이, 23, 기린, 36, banana, 3, kiwi, 62, apple, 43, kiwi, 24, apple, 32, kiwi, 2, banana, 233, kiwi, 36, apple, 42, banana, 33"
+
+a.split(", ")  # split은 공백에 뭔가를 넣준다!
+leng = len(a) # len은 문자열 길이 구하는언어, len = len(a) 오류발생!
+name = []
+number = []
+for i in range(0, leng): # range는 배열을 말한다 맨마지막꺼 뺴고 다포함 예시)0,11 이면 0부터 10까지
+	if i % 2 == 0:  # 컴퓨터 언어는 0부터 시작이다.! 즉 0 = 1 다 홀수로 배열 1 = 2 이므로 짝수
+		name.append(a[i]) # append 즉 첨부,마지막붙이다 라는뜻이다
+	else:                 # if 는 조건문이고 맞을시 발동 else 다른것 틀린것이라고 생각한다.
+		number.append(a[i])
+		
+		
+# 2. 중복되는 name원소는 삭제하고, 해당 이름과 관련있는 숫자들을 모두 더한다.
+temp ="" # temp=list[i]의 형태는 참조형 listA.count(list[i]안됨, 원시형str로 하라함
+
+for j in range(0, int(leng/2)):
+	temp = name[j]
+	if name.count(temp) > 1: # count 리스트 안에 X가 몇개 존재하는지 a가 10개 있다면 10!
+		name[j] = ""
+		j2 = name.index(temp) # index 함수는 x값의 위치 예시) a =1,2,3 a.index(1)하면 0배출
+		number[j2] = number[j2] + "+" + number[j]
+		number[j] = ""
+		
+		
+# 출력하기
+lsum = []
+
+for l in number:
+	addlist = []
+	if l.find("+") !=-1:
+		addlist = l.split("+")
+		nsum = 0
+		for k in range(0,len(addlist)):
+			nsum = nsum + int(addlist[k])
+		lsum.append(str(nsum))
+	else:
+		lsum.append(l)
+for i in range(0, len(name)):
+	if number[i] != "":
+		print("{0} = {1} = Total {2}.".format(name[i], number[i], lsum[i]))
+print("name=",name)
+print("number=",number)
+print("sum=",lsum)

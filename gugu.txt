@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-07-30T15:50:21+09:00
+
+====== 곱하기 ======
+Created 목요일 30 7월 2020
+
+sum = None   # sum 입력받은 리스트나 튜플의 모든요소의 합을 돌려주는 함수
+
+
+def my_four_cal(sum, param):   # def는 함수를 만들 떄 사용하는 예약어 이다.
+	result = sum  # result = 수행할 문장 이다
+	if "+" in param:
+		result = sum + int(param[1:])
+	elif "-" in param:
+		result = sum - int(param[1:])
+	elif "*" in param:
+		result = sum * int(param[1:])
+	elif "/" in param:
+		result = sum / int(param[1:])
+	return result # return 결과값
+
+
+while True:
+	if not sum:
+		sum = int(input("입력...>"))
+		print("sum이 {}입니다.".format(sum)) # sum이 적는 곳이라 하면 format는 적는곳의 값을 인식한다.
+
+	txt = input("입력...>")
+	print("{}를 계산합니다.".format(txt))
+	sum = my_four_cal(sum, txt)
+	print(sum)
+	if txt == 'q':
+		break
